@@ -1,0 +1,182 @@
+{% extends 'base_waste.html' %}
+{% load static %}
+{% block cuerpo %}
+
+
+      
+	 <div class="content">
+            <!-- Animated -->
+            <!-- <div class="animated fadeIn">
+                <div class="row">
+				
+                    <div class="col-md-4 offset-md-3 mr-auto ml-auto">
+                        <div class="card mb-3" style="max-width: 540px;">
+								<div class="row no-gutters">
+									<div class="col-lg-3">
+										<p align="center">
+										<br><img src="{% static 'images/dispositivo2.png' %}" height="65" width="70"/>
+										</p>
+									</div>
+									<div class="col-lg-8">
+										<div class="card-body">
+											<div class="stat-widget-five">
+												<div class="stat-text"><span class="count">{{n_dispositivos}}</span></div>
+												<div class="stat-heading">Dispositivos Instalados</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+						</div>
+					</div>
+
+					
+					 <div class="col-lg-4 col-md-5">
+						<div class="card">
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-3">
+                                        <i class="menu-icon fa fa-truck"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text"><span class="count">{{n_dispositivos_llenos}}</span></div>
+                                            <div class="stat-heading">Listos para recolectar</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+					
+                </div>
+			
+			</div> -->
+			
+            <div class="animated fadeIn">
+                <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Dispositivos Instalados: {{n_dispositivos}}</strong>
+                            </div>
+							
+							<div class="gmap_unix card-body">
+							
+								<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>	  
+								<!-- <div id="map" class="map map-home" style="margin:12px 0 12px 0;height:400px;"></div> -->
+								<div id="map" class="map map-home" style="margin:0 0 0 0;height:400px;"></div>
+								<script>
+									var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+										osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+										osm = L.tileLayer(osmUrl, {maxZoom: 19, attribution: osmAttrib});
+										
+									var locations = [];
+									
+									var LeafIcon = L.Icon.extend({
+										options: {
+										//shadowUrl: 'leaf-shadow.png',
+										iconSize:     [36, 36],
+										//shadowSize:   [50, 64],
+										iconAnchor:   [10, 30],
+										//shadowAnchor: [4, 62],
+										popupAnchor:  [0, 0]
+										}
+									});
+									
+									var IconoBasurero = new LeafIcon({iconUrl: "{% static 'images/basurero.png' %}"});
+									//var IconoBasurero = new LeafIcon({iconUrl: "http://localhost:8000/static/images/icono_luminaria.png"});
+									//var IconoBasurero = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/icono_basurero.png"});
+									function nuevo_punto(imei,latitud,longitud,llenado,bateria,humo,volcamiento,fecha){
+										locations.push([imei,latitud,longitud,llenado,bateria,humo,volcamiento,fecha])
+									}
+									
+									function marcadores(){
+										var map = L.map('map').setView([locations[0][1], locations[0][2]], 18).addLayer(osm);
+										for (i = 0; i < locations.length; i++) {
+											L.marker([locations[i][1], locations[i][2]], {icon: IconoBasurero}).addTo(map).bindPopup("<b>Iluminación sol: </b>"+locations[i][3]+"%.<br><b>Batería: </b>"+locations[i][4]+"%.<br><b>Encendido: </b>"+locations[i][5]+"<br><b>Nivel: </b>"+locations[i][6]+"<br><b>Fecha: </b>"+locations[i][7]).on('click', onClick);		
+											//L.marker([locations[i][1], locations[i][2]], {icon: IconoBasurero}).addTo(map).bindPopup("<b>Llenado: </b>"+locations[i][3]+"%.<br><b>Batería: </b>"+locations[i][4]+"%.<br><b>volcamiento: </b>"+locations[i][5]+"<br><b>Humo: </b>"+locations[i][6]+"<br><b>Fecha: </b>"+locations[i][7]).on('click', onClick);		
+											
+											function onClick(e) {
+												map.flyTo(e.target.getLatLng(),18);
+											;}
+										}
+									}
+									
+									google.charts.setOnLoadCallback(drawMultSeries);
+
+									function drawMultSeries() {
+										  var data = new google.visualization.DataTable();
+										  data.addColumn('timeofday', 'Time of Day');
+										  data.addColumn('number', 'Motivation Level');
+										  data.addColumn('number', 'Energy Level');
+
+										  data.addRows([
+											[{v: [8, 0, 0], f: '8 am'}, 1, .25],
+											[{v: [9, 0, 0], f: '9 am'}, 2, .5],
+											[{v: [10, 0, 0], f:'10 am'}, 3, 1],
+											[{v: [11, 0, 0], f: '11 am'}, 4, 2.25],
+											[{v: [12, 0, 0], f: '12 pm'}, 5, 2.25],
+											[{v: [13, 0, 0], f: '1 pm'}, 6, 3],
+											[{v: [14, 0, 0], f: '2 pm'}, 7, 4],
+											[{v: [15, 0, 0], f: '3 pm'}, 8, 5.25],
+											[{v: [16, 0, 0], f: '4 pm'}, 9, 7.5],
+											[{v: [17, 0, 0], f: '5 pm'}, 10, 10],
+										  ]);
+
+										  var options = {
+											title: 'Motivation and Energy Level Throughout the Day',
+											hAxis: {
+											  title: 'Time of Day',
+											  format: 'h:mm a',
+											  viewWindow: {
+												min: [7, 30, 0],
+												max: [17, 30, 0]
+											  }
+											},
+											vAxis: {
+											  title: 'Rating (scale of 1-10)'
+											}
+										  };
+
+										  var chart = new google.visualization.ColumnChart(
+											document.getElementById('chart_div'));
+
+										  chart.draw(data, options);
+										  function onClick(e) {
+												map.flyTo(e.target.getLatLng(),18);
+												}
+										}
+									
+								</script> 
+							</div>
+                        </div>
+                </div>
+			</div>
+	</div>
+	
+	{% for i in dispositivos%}
+		<script>
+			nuevo_punto(String("{{i.Imei}}"), parseFloat("{{i.Latitud}}"), parseFloat("{{i.Longitud}}"), String("{{i.Llenado}}"), String("{{i.Bateria}}"), String("{{i.Humo}}"), String("{{i.Volcamiento}}"), String("{{i.FechaDispositivo}}"));
+			//<!-- nuevo_dato(parseFloat({{i.Llenado}}),String("{{i.Imei}}")); -->
+			drawMultSeries();
+		</script>
+	{%endfor%}
+   
+    <script>
+		marcadores();
+		
+	</script> 
+
+	
+	<!-- /.content -->
+	<div class="clearfix"></div>
+	
+		
+	<script>
+		//graficar(); 
+	
+	</script>
+    
+{% endblock %}
+
+ 

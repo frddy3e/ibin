@@ -1,0 +1,209 @@
+{% extends 'base_waste.html' %}
+{% load static %}
+{% block cuerpo %}
+
+	<div class="content">
+            <div class="animated fadeIn">
+				<div class="row">
+					<div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong> Histórico de dispositivos </strong>
+                            </div>
+							<div class="gmap_unix card-body">
+								<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>	  
+								<!-- <div id="map" class="map map-home" style="margin:12px 0 12px 0;height:400px;"></div> -->
+								<div id="map" class="map map-home" style="margin:0 0 0 0;height:350px;"></div>
+								<script>
+									var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+										osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+										osm = L.tileLayer(osmUrl, {maxZoom: 19, attribution: osmAttrib});
+										
+									var locations = [];
+									
+									var LeafIcon = L.Icon.extend({
+										options: {
+										//shadowUrl: 'leaf-shadow.png',
+										iconSize:     [36, 36],
+										//shadowSize:   [50, 64],
+										iconAnchor:   [18, 36],
+										//shadowAnchor: [4, 62],
+										popupAnchor:  [0, -30]
+										}
+									});
+									
+									var imei="";
+									
+									var IconoBasurero = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/icono_luminaria.png"});
+									
+									function nuevo_punto(imei,latitud,longitud,llenado,bateria,humo,volcamiento,fecha){
+										locations.push([imei,latitud,longitud,llenado,bateria,humo,volcamiento,fecha])
+									}
+									
+									function marcadores(){
+										var map = L.map('map').setView([locations[0][1], locations[0][2]], 18).addLayer(osm);
+										for (i = 0; i < locations.length; i++) {
+											//var marker = L.marker([locations[i][1], locations[i][2]], {icon: IconoBasurero}).addTo(map).bindPopup("<b>Llenado: </b>"+locations[i][3]+"%.<br><b>Batería: </b>"+locations[i][4]+"%.<br><b>Humo: </b>"+locations[i][5]+"<br><b>Volcado: </b>"+locations[i][6]+"<br><b>Fecha: </b>"+locations[i][7]).on('click', onClick);		
+											//marker.id=i;
+											var marker = L.marker([locations[i][1], locations[i][2]], {icon: IconoBasurero}).addTo(map).on('click', onClick);		
+											marker.id=i;
+												
+											function onClick(e) {
+												map.flyTo(e.target.getLatLng(),18);
+												imei = String(locations[e.target.id][0]);
+												//console.log("click:",disp);
+												//console.log("click:","imei"+locations[e.target.id][0]);
+												cargar_datos();
+											;}
+										}
+									}
+								</script> 
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-lg-6">
+						<div  id="margenes6" class="card">
+							<div id="margenes6" class="card-body">
+								<style type="text/css">
+									#myChart {width:1000px; height:1000px;}
+									canvas {width:1000px; height:1000px;}
+									#margenes6 {height: 438px; }
+								</style>
+								<!-- <h4 class="mb-3" id="titulo_grafico">Llenado </h4> -->
+								<select id="select_filtro" width="65" onchange = "cargar_datos()" class="form-control form-white" data-placeholder="Elija un dispositivo" name="category-color">								
+									<option value="1">Potencia consumida</option>
+									<option value="2">Bateria</option>
+									<option value="3">Encendido</option>
+									<!-- <option value="4">Incendios</option> -->
+								</select>
+								
+								<canvas id="myChart"></canvas>
+									<script>
+										var ctx= document.getElementById("myChart").getContext("2d");
+										var myChart;
+										var datos=[];
+										var etiquetas=[];
+										var titulo="";
+										
+										var filtro = document.getElementById("select_filtro");
+										
+										function cargar_datos(){
+											
+											for(n=0;n<datos.length;n++){
+												myChart.data.labels.pop();
+												myChart.data.datasets.forEach((dataset) => {
+													dataset.data.pop();
+												});
+											}
+											
+											datos=[];
+											etiquetas=[];
+											titulo = imei;
+											var n=0;
+											{% for historico in historicos %}
+												n=n+1;
+												if(String("{{historico.Imei}}")==imei){
+													if(filtro.options[filtro.selectedIndex].value==1)
+														nuevo_dato(parseFloat({{historico.Llenado}}),String("{{historico.Fecha}}"));
+													else if(filtro.options[filtro.selectedIndex].value==2)
+														nuevo_dato(parseFloat({{historico.Bateria}}),String("{{historico.Fecha}}"));
+													else if(filtro.options[filtro.selectedIndex].value==3)
+														nuevo_dato(parseFloat({{historico.Volcamiento}}),String("{{historico.Fecha}}"));
+													else if(filtro.options[filtro.selectedIndex].value==4)
+														nuevo_dato(parseFloat({{historico.Humo}}),String("{{historico.Fecha}}"));
+												}
+											{% endfor %}
+											
+											
+											for(n=0;n<datos.length;n++){
+												myChart.data.labels.push(etiquetas[n]);
+												//myChart.data.labels.push(n);
+												myChart.data.datasets.forEach((dataset) => {
+													dataset.data.push(datos[n]);
+												});
+											}
+											
+											myChart.update();
+											
+											//graficar();
+										}
+										
+										function nuevo_dato(llenado,etiqueta){
+											console.log("nuevo:","as");
+											//console.log("nuevo:",""+llenado);
+											datos.push(llenado);
+											etiquetas.push(etiqueta);
+										}
+										
+										function graficar(){
+											console.log("graficar:","as");
+											myChart = new Chart(ctx,{
+											type:"line",
+											data:{
+												labels:etiquetas,
+												datasets:[{
+														label:titulo,
+														
+														data:datos,
+														backgroundColor:[
+															'rgb(66, 134, 244,0.5)',
+															'rgb(74, 135, 72,0.5)',
+															'rgb(229, 89, 50,0.5)'
+														]
+												}]
+											},
+											options:{
+												scales:{
+													yAxes:[{
+															ticks:{
+																beginAtZero:true
+															}
+													}]
+												}
+											}
+										});
+									}
+									</script> 
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	{% for i in dispositivos %}
+		<script>
+			nuevo_punto(String("{{i.Imei}}"), parseFloat({{i.Latitud}}), parseFloat({{i.Longitud}}), String("{{i.Llenado}}"), String("{{i.Bateria}}"), String("{{i.Humo}}"), String("{{i.Volcamiento}}"), String("{{i.FechaDispositivo}}"));
+			//nuevo_dato(parseFloat({{i.Llenado}}),String("{{i.Imei}}"));
+		</script>
+	{%endfor%}
+	
+<!-- 	
+	{% for key, values in informacion.items %}
+		<script>
+			console.log("key:", String("{{key}}")+String("{{values|length}}"));
+		
+			{% with name=values %} 
+				{% for v in name %}
+						console.log("values:", String("{{v}}"));
+				{% endfor %}
+			{% endwith %}
+		
+		</script>
+	{% endfor %} -->
+	
+
+   
+    <script>
+		marcadores();
+	</script> 
+
+	<!-- /.content -->
+	<div class="clearfix"></div>
+	
+ 	<script>
+		graficar();
+	</script> 
+    
+{% endblock %}

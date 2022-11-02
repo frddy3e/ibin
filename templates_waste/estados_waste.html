@@ -1,0 +1,305 @@
+{% extends 'base_waste.html' %}
+{% load static %}
+{% block cuerpo %}
+
+
+		<!-- <div class="content">
+            <div class="animated fadeIn">
+                <div class="row">
+					<div class="col-lg-4 col-md-4">
+	
+						<style type="text/css">
+							#margenes1 {margin-top: -15px; height: 65px; }
+							#margenes2 {margin-top: -5px; height: 65px; }
+							#margenes3 {margin-top: -35px; }
+							#margenes4 {margin-top: -15px; height: 65px; background-color: #6abd8f; -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0); box-shadow: 0 0 0 rgba(0, 0, 0, 0); }}
+							#margenes5 {margin-top: -5px; height: 65px; background-color: #6abd8f;}
+							#texto_porcentaje1 { margin-left: -100px; display: visible; color: white;}
+							#texto_porcentaje2 { margin-left: -100px; display: visible; color: white;}
+							#select_porcentaje_llenado { margin-left: -100px; width: 100px; display: visible;}
+							#select_porcentaje_bateria { margin-left: -100px; width: 100px; display: visible;}
+						</style>
+							
+						<div id="margenes1" class="card">
+							<div id="margenes1" class="card-body">
+								<div id="margenes2" class="stat-widget-five">
+													
+									<style type="text/css">
+										#icon_lleno {top: -5px;font-size: 40px; z-index: -1; text-align: center; width: inherit; display: visible;}
+										#icon_bateria {font-size: 40px; z-index: -1; text-align: center; width: inherit; display: visible;}
+										#icon_volcamiento {font-size: 40px; z-index: -1; text-align: center; width: inherit; display: visible;}
+										#icon_humo {font-size: 40px; z-index: -1; text-align: center; width: inherit; display: visible;}
+										#texto_lleno{font-size: 14px; color: #868e96; display: visible;}
+										#texto_bateria{font-size: 14px; color: #868e96; display: visible;}
+										#texto_volcamiento{font-size: 14px; color: #868e96; display: visible;}
+										#texto_humo{font-size: 14px; color: #868e96; display: visible;}
+										#imagen_volcamiento{transform: rotate(-45deg); display: visible;}
+									</style>
+													
+									<div class="stat-icon dib flat-color-6">
+										<i id="icon_lleno" class="menu-icon fa fa-truck"></i>
+									</div>
+									<div class="stat-icon dib flat-color-4">
+										<i id="icon_bateria" class="menu-icon fa fa-battery-2"></i>
+									</div>
+									<div class="stat-icon dib flat-color-4">
+										<i id="icon_humo" class="menu-icon fa fa-fire"></i>
+									</div>
+									<div class="stat-icon dib flat-color-4">
+										<img id="imagen_volcamiento"src="{% static 'images/basurero.png' %}" height="55" width="65"/>
+									</div>
+													
+									<div class="stat-content">
+										<div class="text-left dib">
+											<div class="stat-text"><span class="count">{{n_dispositivos}}</span></div>																			
+												<div class="stat-heading" id="texto_lleno">Listos para recolectar</div>
+												<div class="stat-heading" id="texto_bateria">Baterías por agotarse</div>
+												<div class="stat-heading" id="texto_volcamiento">Contenedores volcados</div>
+												<div class="stat-heading" id="texto_humo">Contenedores con humo</div>
+															
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-3 col-md-3">
+                        <div id="margenes4" class="card">
+                            <div id="margenes4" class="card-body">
+                                <div id="margenes5" class="stat-widget-five">
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+											<div class="stat-heading" id="texto_porcentaje1">Llenado </div>
+											<div class="stat-heading" id="texto_porcentaje2">Batería </div>
+											
+											<select id="select_porcentaje_llenado" onchange = "mostrar_info_llenado()" class="form-control form-white" data-placeholder="Elija un dispositivo" name="category-color">								
+												<option value="40">< 50%</option>
+												<option value="50">> 50%</option>
+												<option value="60">> 60%</option>
+												<option value="70">> 70%</option>
+												<option value="80">> 80%</option>
+												<option value="90">> 90%</option>
+											</select>
+											<select id="select_porcentaje_bateria" onchange = "mostrar_info_bateria()" class="form-control form-white" data-placeholder="Elija un dispositivo" name="category-color">								
+												<option value="10">< 10%</option>
+												<option value="20">< 20%</option>
+												<option value="30">< 30%</option>
+												<option value="40">< 40%</option>
+												<option value="50">< 50%</option>
+												<option value="60">> 50%</option>
+											</select>
+											
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					
+                </div>
+			</div>
+        </div> -->
+					
+	<div class="content">
+		<div class="animated fadeIn"> 		
+			<div class="row m-0">
+				<div id="margenes3" class="col-lg-12">
+					<div id="margenes3" class="card">
+						<div class="card-header">
+							<style type="text/css">
+								#margenes1 {margin-top: -10px; height: 65px; }
+								#margenes2 {margin-top: -10px; height: 65px; }
+								#margenes3 {margin-top: -5px; }
+								#margenes4 {margin-top: -10px; height: 65px; background-color: #6abd8f; -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0); box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+								#margenes5 {margin-top: -10px; height: 65px; background-color: #6abd8f;}
+								#select_porcentaje_llenado {margin-left: 800px; margin-top: -30px; width: 100px; display: visible;}
+								#select_porcentaje_bateria {margin-left: 800px; margin-top: -30px; width: 100px; display: visible;}
+								#icon_lleno {margin-left: 35px; margin-top: 5px; font-size: 40px; text-align: center; width: inherit; display: visible;}
+								#icon_bateria {margin-left: 30px; margin-top: 5px; font-size: 40px; text-align: center; width: inherit; display: visible;}
+								#icon_volcamiento {margin-left: 30px; margin-top: 5px; font-size: 40px; text-align: center; width: inherit; display: visible;}
+								#icon_humo {margin-left: 30px; margin-top: 5px; font-size: 40px; text-align: center; width: inherit; display: visible;}
+								#texto_lleno{margin-left: 440px; margin-top: -150px; font-size: 16px; color: black; display: visible;}
+								#texto_bateria{margin-left: 440px; margin-top: -150px; font-size: 16px; color: black; display: visible;}
+								#texto_volcamiento{margin-left: 10px; top: -10px; font-size: 16px; color: black; display: visible;}
+								#texto_humo{margin-left: 50px; margin-top: 30px; font-size: 16px; color: black; display: visible;}
+								#imagen_volcamiento{margin-left: 30px; transform: rotate(-45deg); display: visible;}
+							</style>
+							{% if filtro == "llenado"%}
+								<div class="stat-icon dib flat-color-6">
+									<i id="icon_lleno" class="menu-icon fa fa-truck"></i>
+								</div>
+								<strong id="texto_volcamiento"> Listos para recolectar: </strong>
+								<strong id="n_disp">n</strong>
+								<strong id="texto_lleno">Llenado: </strong>
+								<select id="select_porcentaje_llenado" width="65" onchange = "marcadores()" class="form-control form-white" data-placeholder="Elija un dispositivo" name="category-color">								
+									<option value="40">> 40%</option>
+									<option value="50">> 50%</option>
+									<option value="60">> 60%</option>
+									<option value="70">> 70%</option>
+									<option value="80">> 80%</option>
+									<option value="90">> 90%</option>
+								</select>
+							{% elif filtro == "bateria" %}
+								<div class="stat-icon dib flat-color-1">
+									<i id="icon_bateria" class="menu-icon fa fa-battery-2"></i>
+								</div>
+								<strong id="texto_volcamiento"> Baterías: </strong>
+								<strong id="n_disp">n</strong>
+								<strong id="texto_bateria">Batería: </strong>
+								<select id="select_porcentaje_bateria" width="65" onchange = "marcadores()" class="form-control form-white" data-placeholder="Elija un dispositivo" name="category-color">								
+									<option value="10">< 10%</option>
+									<option value="20">< 20%</option>
+									<option value="30">< 30%</option>
+									<option value="40">< 40%</option>
+									<option value="50">< 50%</option>
+									<option value="60">< 60%</option>
+								</select>
+								
+							{% elif filtro == "volcamiento" %}
+								<img id="imagen_volcamiento"src="{% static 'images/basurero.png' %}" height="45" width="55"/>
+								<strong> Contenedores volcados: </strong>
+								<strong id="n_disp">n</strong>
+							{% elif filtro == "humo" %}
+								<div class="stat-icon dib flat-color-4">
+									<i id="icon_humo" class="menu-icon fa fa-fire"></i>
+								</div>
+								<!-- <strong id="texto_volcamiento"> Contenedores con humo: </strong> -->
+								<strong id="texto_volcamiento"> Encendidos: </strong>
+								<strong id="n_disp">n</strong>
+							{%endif%}
+							<!-- <strong id="n_disp">n</strong> -->
+							<!-- <strong>Listos para recolectar</strong> -->
+							<!-- <strong>MAPA</strong> -->
+						</div>
+						
+						<div class="gmap_unix card-body">
+						
+							<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>	  
+							<!-- <div id="map" class="map map-home" style="margin:12px 0 12px 0;height:400px;"></div> -->
+							<div id="map" class="map map-home" style="margin:0 0 0 0;height:400px;"></div>
+							<script>
+								var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+									osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+									osm = L.tileLayer(osmUrl, {maxZoom: 19, attribution: osmAttrib});
+									
+								var locations = [];
+								
+								var LeafIcon = L.Icon.extend({
+									options: {
+									//shadowUrl: 'leaf-shadow.png',
+									iconSize:     [36, 36],
+									//shadowSize:   [50, 64],
+									iconAnchor:   [10, 30],
+									//shadowAnchor: [4, 62],
+									popupAnchor:  [0, -30]
+									}
+								});
+								
+								//var IconoBasurero = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero.png"});
+								//var IconoBasureroError = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero5.png"});
+								var IconoBasurero = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/icono_luminaria.png"});
+								var IconoBasureroError = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero5.png"});
+								
+								
+								function nuevo_punto(imei,latitud,longitud,llenado,bateria,humo,volcamiento,fecha){
+									locations.push([imei,latitud,longitud,llenado,bateria,humo,volcamiento,fecha])
+								}
+								
+								var mapa;
+								var layer;
+								
+								function init_mapa(){
+									map = L.map('map').setView([locations[0][1], locations[0][2]], 18).addLayer(osm);
+									layer = L.layerGroup().addTo(map);
+								}
+								
+								function marcadores(){
+									var menu_llenado = document.getElementById("select_porcentaje_llenado");
+									var menu_bateria = document.getElementById("select_porcentaje_bateria");
+									var n_disp = document.getElementById("n_disp");
+									var n=0;
+									layer.clearLayers();
+									
+									for (i = 0; i < locations.length; i++) {
+										if( String("{{filtro}}")=="llenado"){
+											if(parseFloat(locations[i][0]) >= menu_llenado.options[menu_llenado.selectedIndex].value){
+												n++;
+												L.marker([locations[i][1], locations[i][2]], {icon: IconoBasureroError}).addTo(layer).bindPopup("<b>Llenado: </b>"+locations[i][0]+"%").on('click', onClick);											
+											}else{
+												L.marker([locations[i][1], locations[i][2]], {icon: IconoBasurero}).addTo(layer).bindPopup("<b>Llenado: </b>"+locations[i][0]+"%").on('click', onClick);
+											}									
+										}else if( String("{{filtro}}")=="bateria"){
+											if(parseFloat(locations[i][0]) <= menu_bateria.options[menu_bateria.selectedIndex].value){
+												n++;
+												L.marker([locations[i][1], locations[i][2]], {icon: IconoBasureroError}).addTo(layer).bindPopup("<b>Batería: </b>"+locations[i][0]+"%").on('click', onClick);											
+											}else{
+												L.marker([locations[i][1], locations[i][2]], {icon: IconoBasurero}).addTo(layer).bindPopup("<b>Batería: </b>"+locations[i][0]+"%").on('click', onClick);
+											}
+										}else if( String("{{filtro}}")=="humo"){
+											if(parseInt(locations[i][0])==1){
+												n++;
+												L.marker([locations[i][1], locations[i][2]], {icon: IconoBasureroError}).addTo(layer).bindPopup("<b>Encendido: </b>"+locations[i][0]).on('click', onClick);											
+											}else{
+												L.marker([locations[i][1], locations[i][2]], {icon: IconoBasurero}).addTo(layer).bindPopup("<b>Encendido: </b>"+locations[i][0]).on('click', onClick);
+											}
+										}else if( String("{{filtro}}")=="volcamiento"){
+											if(parseInt(locations[i][0])==1){
+												n++;
+												L.marker([locations[i][1], locations[i][2]], {icon: IconoBasureroError}).addTo(layer).bindPopup("<b>Volcado: </b>"+locations[i][0]).on('click', onClick);											
+											}else{
+												L.marker([locations[i][1], locations[i][2]], {icon: IconoBasurero}).addTo(layer).bindPopup("<b>Volcado: </b>"+locations[i][0]).on('click', onClick);
+											}
+										}
+										function onClick(e) {
+											map.flyTo(e.target.getLatLng(),18);
+										;}
+										n_disp.innerHTML = String(n);
+										//n_disp.text = String(layer._layers.length);
+										//n_disp.content = String(layer._layers.length);
+									}
+								}
+								
+							</script>
+							
+							
+							
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	{% for i in dispositivos%}
+		<script type="text/javascript">
+			if( String("{{filtro}}")=="llenado"){
+				nuevo_punto(String("{{i.Llenado}}"), parseFloat("{{i.Latitud}}"), parseFloat("{{i.Longitud}}"), parseFloat("{{i.Imei}}"));
+			}else if( String("{{filtro}}")=="bateria"){
+				nuevo_punto(String("{{i.Bateria}}"), parseFloat("{{i.Latitud}}"), parseFloat("{{i.Longitud}}"), parseFloat("{{i.Imei}}"));
+			}else if( String("{{filtro}}")=="volcamiento"){
+				nuevo_punto(String("{{i.Volcamiento}}"), parseFloat("{{i.Latitud}}"), parseFloat("{{i.Longitud}}"), parseFloat("{{i.Imei}}"));
+			}else if( String("{{filtro}}")=="humo"){
+				nuevo_punto(String("{{i.Humo}}"), parseFloat("{{i.Latitud}}"), parseFloat("{{i.Longitud}}"), parseFloat("{{i.Imei}}"));
+			}
+		</script>
+		
+	{%endfor%}
+	
+	<script>
+		init_mapa();
+	</script>
+	
+	<script>
+		marcadores();
+	</script>
+   
+	
+	<!-- /.content -->
+    <div class="clearfix"></div>
+	
+
+
+
+{% endblock %}

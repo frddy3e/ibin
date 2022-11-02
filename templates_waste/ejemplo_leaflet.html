@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Mapa simple de OpenStreetMap con Leaflet</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
+</head>
+<body>
+<h1>Mapa simple de OpenStreetMap con Leaflet</h1>  
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>	  
+<div id="map" class="map map-home" style="margin:12px 0 12px 0;height:400px;"></div>
+<script>
+	var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+		osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib});
+	var map = L.map('map').setView([-0.2294616, -78.5234096], 18).addLayer(osm);
+	L.marker([-0.2294616, -78.5234096])
+		.addTo(map)
+		.bindPopup('Llenado: 80%')
+		.openPopup();
+		
+	var LeafIcon = L.Icon.extend({
+		options: {
+		//shadowUrl: 'leaf-shadow.png',
+		iconSize:     [36, 36],
+		//shadowSize:   [50, 64],
+		iconAnchor:   [18, 36],
+		//shadowAnchor: [4, 62],
+		popupAnchor:  [0, -20]
+		}
+	});
+	
+	var greenIcon = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero.png"}),
+	redIcon = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero3.png"}),
+	orangeIcon = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero5.png"});
+	
+	L.marker([-0.228896, -78.524197], {icon: greenIcon}).addTo(map).bindPopup("I am a green leaf.");
+	L.marker([-0.229729, -78.523989], {icon: redIcon}).addTo(map).bindPopup("I am a red leaf.");
+	//L.marker([-0.229802, -78.523186], {icon: orangeIcon}).addTo(map).bindPopup("<b>Hello world!</b><br>I am a popup.");	
+	L.marker([-0.229802, -78.523186], {icon: orangeIcon}).addTo(map).bindPopup("<b>Llenado: </b>80%.<br><b>Batería: </b>30%.<br><b>Volcado: </b>no<br><b>Humo: </b>si");	
+	
+</script>
+  </body>
+</html>
