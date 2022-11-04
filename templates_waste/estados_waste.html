@@ -131,7 +131,7 @@
 								</div>
 								<strong id="texto_volcamiento"> Listos para recolectar: </strong>
 								<strong id="n_disp">n</strong>
-								<strong id="texto_lleno">Llenado: </strong>
+								<!-- <strong id="texto_lleno">Llenado: </strong> -->
 								<select id="select_porcentaje_llenado" width="65" onchange = "marcadores()" class="form-control form-white" data-placeholder="Elija un dispositivo" name="category-color">								
 									<option value="40">> 40%</option>
 									<option value="50">> 50%</option>
@@ -146,7 +146,7 @@
 								</div>
 								<strong id="texto_volcamiento"> Baterías: </strong>
 								<strong id="n_disp">n</strong>
-								<strong id="texto_bateria">Batería: </strong>
+								<!-- <strong id="texto_bateria">Batería: </strong> -->
 								<select id="select_porcentaje_bateria" width="65" onchange = "marcadores()" class="form-control form-white" data-placeholder="Elija un dispositivo" name="category-color">								
 									<option value="10">< 10%</option>
 									<option value="20">< 20%</option>
@@ -198,8 +198,8 @@
 								
 								//var IconoBasurero = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero.png"});
 								//var IconoBasureroError = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero5.png"});
-								var IconoBasurero = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/icono_luminaria.png"});
-								var IconoBasureroError = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero5.png"});
+								var IconoBasurero = new LeafIcon({iconUrl: "http://localhost:8000/static/images/basurero.png"});
+								var IconoBasureroError = new LeafIcon({iconUrl: "http://localhost:8000/static/images/basurero5.png"});
 								
 								
 								function nuevo_punto(imei,latitud,longitud,llenado,bateria,humo,volcamiento,fecha){

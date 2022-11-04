@@ -30,9 +30,9 @@
 		}
 	});
 	
-	var greenIcon = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero.png"}),
-	redIcon = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero3.png"}),
-	orangeIcon = new LeafIcon({iconUrl: "http://104.248.229.139/static/images/basurero5.png"});
+	var greenIcon = new LeafIcon({iconUrl: "http://localhost:8000/static/images/basurero.png"}),
+	redIcon = new LeafIcon({iconUrl: "http://localhost:8000/static/images/basurero3.png"}),
+	orangeIcon = new LeafIcon({iconUrl: "http://localhost:8000/static/images/basurero5.png"});
 	
 	L.marker([-0.228896, -78.524197], {icon: greenIcon}).addTo(map).bindPopup("I am a green leaf.");
 	L.marker([-0.229729, -78.523989], {icon: redIcon}).addTo(map).bindPopup("I am a red leaf.");
