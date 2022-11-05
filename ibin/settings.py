@@ -131,7 +131,7 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
-LOGIN_REDIRECT_URL = '/redirect/'
+LOGIN_REDIRECT_URL = '/waste/inicio_waste'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 
