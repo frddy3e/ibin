@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SMART LUM</title>
+    <title>IBIN</title>
    <!--  <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 	<meta name="viewport" content="initial-scale=0.2, maximum-scale=1">
@@ -316,11 +316,7 @@
 							<style type="text/css">
 								#icono {font-size: 25px;}
 							</style>
-                            <!-- <li><i class="fa fa-trash"></i><a href="http://104.248.229.139/estados_waste/?filtro=llenado">Llenado</a></li> -->
-                            <!-- <li><i class="fa fa-battery-4"></i><a href="http://104.248.229.139/estados_waste/?filtro=bateria">Batería</a></li> -->
                             <li><i class="fa fa-battery-4"></i><a href="{% url 'estados_waste' %}?filtro=bateria">Batería</a></li>
-							<!-- <li><i class="fa fa-exclamation-circle"></i><a href="http://104.248.229.139/estados_waste/?filtro=volcamiento">Volcamiento</a></li> -->
-                            <!-- <li><i class="fa fa-fire"></i><a href="http://104.248.229.139/estados_waste/?filtro=humo">Encendido</a></li> -->
                             <li><i class="fa fa-fire"></i><a href="{% url 'estados_waste' %}?filtro=humo">Humo</a></li>
 							<!-- para el llenado del contenedores -->
 							<li><i class="fa fa-trash"></i><a href="{% url 'estados_waste' %}?filtro=llenado">Llenado</a></li>
